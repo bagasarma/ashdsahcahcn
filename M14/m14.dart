@@ -126,6 +126,31 @@ class _M14State extends State<M14> {
           SizedBox(
             height: 10,
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              
+              Text("Spasi"),
+              Slider(
+                value: sliderVal,
+                inactiveColor: Colors.blue[100],
+                activeColor: Colors.blue, 
+                
+                min: 0,
+                max: 80,
+                onChanged: (v) {
+                  setState(() {
+                    sliderVal = v;
+                    
+                  });
+                },
+              ),
+            ],
+          ),
+
+          SizedBox(
+            height: 10,
+          ),
           Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 20.0),
@@ -144,10 +169,18 @@ class _M14State extends State<M14> {
                             style: TextStyle(color: Colors.black),
                           ),
                         ),
-                        title: Text(
-                          bln[date.month - 1],
-                          style: TextStyle(color: Colors.black),
-                        ),
+                          title: Transform.translate(
+                            offset: Offset(sliderVal * 4, 0), // Bergerak kiri-kanan berdasarkan slider
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  bln[date.month - 1],
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          ),
                         trailing: Text(
                           "${date.year}",
                           style: TextStyle(color: Colors.black),
